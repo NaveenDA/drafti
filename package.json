@@ -4,12 +4,6 @@
   "description": "Note-taking application based on Markdown with Offline support.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && cross-env NODE_ENV=production tsc",
-    "postbuild": "npm run copy-file",
-    "clean": "rimraf ./build",
-    "copy-file": "cpy '**/*' '!**/*.ts' ../build --cwd=src/ --no-overwrite --parents",
-    "compile": "cross-env NODE_ENV=production tsc",
-    "dev": "cross-env NODE_ENV=development node_modules/.bin/ts-node-dev --respawn --notify false --prefer-ts --ignore-watch node_modules -- src/server.ts ",
     "format": "prettier --write 'src/**/*.ts'",
     "git:conflicts": "git diff --name-only --diff-filter=U",
     "linter": "tslint --fix --project .",
@@ -18,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NaveenDA/standi-backend.git"
+    "url": "git+https://github.com/NaveenDA/drafti.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NaveenDA/standi-backend/issues"
+    "url": "https://github.com/NaveenDA/drafti/issues"
   },
-  "homepage": "https://github.com/NaveenDA/standi-backend#readme",
+  "homepage": "https://github.com/NaveenDA/drafti#readme",
   "dependencies": {},
   "devDependencies": {
     "import-sort-cli": "^6.0.0",
