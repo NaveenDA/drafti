@@ -1,7 +1,7 @@
 {
-  "name": "standi-backend",
+  "name": "drafti-backend",
   "version": "1.0.0",
-  "description": "A small PWA notes taking application based on the Markdown with Offline support",
+  "description": "Backend code for the Drafti",
   "main": "build/server.js",
   "scripts": {
     "build": "npm run clean && cross-env NODE_ENV=production tsc",
@@ -16,17 +16,8 @@
     "start": "node build/server.js",
     "sort:imports": "import-sort --write './src/**/*.ts'"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NaveenDA/standi-backend.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NaveenDA/standi-backend/issues"
-  },
-  "homepage": "https://github.com/NaveenDA/standi-backend#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "body-parser": "^1.19.0",

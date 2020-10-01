@@ -1,5 +1,6 @@
 {
-  "name": "standi-frontend",
+  "name": "drafti-frontend",
+  "description": "Front-end code for the Drafti",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
