@@ -7,7 +7,6 @@
     "pretty": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "module": "commonjs",
     "noImplicitAny": false,
     "noLib": false,
     "sourceMap": false,
@@ -24,10 +23,13 @@
     "removeComments": true,
     "strict": false,
     "strictPropertyInitialization": false,
-    "target": "es5",
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "outDir": "./build",
     "skipLibCheck": true
   },
+  "references": [{ "path": "../core" }],
   "include": ["src/*.ts", "src/**/*.ts"],
   "exclude": ["node_modules", "test", "**/*.spec.ts"]
 }

@@ -2,27 +2,28 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 
-import Collections from "../collections/collections.model";
 import Notes from "../notes/notes.model";
+import Users from "../users/user.model";
 
 @Entity()
-class Users extends BaseEntity {
+class Collections extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
-  name: string;
-
-  @Column({ unique: true })
-  username: string;
-
-  @Column({ select: false })
-  password: string;
+  @ManyToOne(
+    _type => Users,
+    (users: Users) => users.collections,
+    {},
+  )
+  @JoinColumn({ name: "user_id" })
+  user: Users;
 
   @OneToMany(
     type => Notes,
@@ -34,15 +35,11 @@ class Users extends BaseEntity {
   )
   notes: Notes[];
 
-  @OneToMany(
-    type => Notes,
-    (collection: Collections) => collection.user,
-    {
-      onDelete: "CASCADE",
-      onUpdate: "CASCADE",
-    },
-  )
-  collections: Collections[];
+  @Column()
+  name: string;
+
+  @Column({ nullable: true })
+  icon: string;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   created_on: string;
@@ -50,4 +47,4 @@ class Users extends BaseEntity {
   @UpdateDateColumn()
   updated_on;
 }
-export default Users;
+export default Collections;

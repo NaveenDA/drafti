@@ -1,8 +1,10 @@
 import "reflect-metadata";
 
 import * as express from "express";
+import * as swaggerUi from "swagger-ui-express";
 // const routeList = require("express-routes-catalogue").default;
 import routeList from "express-routes-catalogue";
+import { NextFunction } from "express";
 
 import Database from "./system/database";
 import Environment from "./system/envoirment";
@@ -10,6 +12,7 @@ import ExpressConfiguration from "./system/express-config";
 import Routes from "./system/routes";
 import Security from "./system/security";
 
+const swaggerDocument = require("./docs/swagger.json");
 console.time("Server Start time");
 
 const app: express.Application = express();
@@ -22,6 +25,8 @@ ExpressConfiguration(app);
 Routes(app);
 Environment();
 Database();
+
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (req, res) => {
   res.send("Hello world!");

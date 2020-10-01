@@ -4,7 +4,7 @@
   "port": 8081,
   "username": "admin",
   "password": "admin",
-  "database": "standi",
+  "database": "drafti",
   "synchronize": true,
   "logging": false,
   "entities": ["src/**/*.model.ts"]
