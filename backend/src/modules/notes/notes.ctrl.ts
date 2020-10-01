@@ -85,10 +85,10 @@ class NotesCtrl {
     const schema = Joi.object().keys({
       name: Joi.string().required(),
       note: Joi.string().required(),
-      user_id: Joi.string().required(),
-      user: Joi.string().required(),
+      user_id: Joi.string().allow("", null),
       is_shared: Joi.boolean().default(false),
-      collection: Joi.string().required(),
+      collection: Joi.string().allow("", null),
+      cover_pic: Joi.string().allow("", null),
     });
     const user_id = req["user_id"];
 

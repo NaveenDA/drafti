@@ -1,0 +1,610 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Api Documentation for the Drafti",
+    "version": "1.0.0",
+    "title": "Drafti API Documentation"
+  },
+  "host": "localhost:9090",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Authorization",
+      "description": "Login and Registeration"
+    },
+    {
+      "name": "Collection",
+      "description": "Access to Collection (folder)"
+    },
+    {
+      "name": "Users",
+      "description": "Operations about Notes"
+    },
+    {
+      "name": "Notes",
+      "description": "Operations about Notes"
+    }
+  ],
+  "schemes": ["http"],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Authorization"],
+        "summary": "Login to Account",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "formData",
+            "description": "Username of User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "Password of the User ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzSW4iOiIzNjUgZGF5cyIsImRhdGEiOnsiaWQiOiIyMTYyYWEzZi1kYzZkLTQ2NjctOTIyYi01ZjI2ZGEzNzIwMGMifSwiaWF0IjoxNjAxNTQ2NjQ3fQ.BjprT6TGXFTDE3mL6suM6LeoRHpyH6XAon1XLUarRhs"
+          },
+          "400": {
+            "code": 400,
+            "message": "Bad Credentials"
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": ["Authorization"],
+        "summary": "Create a new Account",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Name of User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "formData",
+            "description": "Username of User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "Password of the User ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzSW4iOiIzNjUgZGF5cyIsImRhdGEiOnsiaWQiOiIyMTYyYWEzZi1kYzZkLTQ2NjctOTIyYi01ZjI2ZGEzNzIwMGMifSwiaWF0IjoxNjAxNTQ2NjQ3fQ.BjprT6TGXFTDE3mL6suM6LeoRHpyH6XAon1XLUarRhs"
+          },
+          "500": {
+            "message": "Problem Registring User"
+          }
+        }
+      }
+    },
+    "/collections": {
+      "get": {
+        "tags": ["Collection"],
+        "summary": "List all folders",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem Registring User"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Collection"],
+        "summary": "Update the Collection Information",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Name of the Collection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "icon",
+            "in": "formData",
+            "description": "Icon for the Collection",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem While Getting Collection"
+          }
+        }
+      }
+    },
+    "/collections/icons/{slug}": {
+      "get": {
+        "tags": ["Collection"],
+        "summary": "Search icons for the collection",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "Search Query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem Registring User"
+          }
+        }
+      }
+    },
+    "/collections/{id}": {
+      "get": {
+        "tags": ["Collection"],
+        "summary": "Get the Details of particular collection ID",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Collection ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem While Getting Collection"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Collection"],
+        "summary": "Update the Collection Information",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Collection ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Name of the Collection",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "icon",
+            "in": "formData",
+            "description": "Icon for the Collection",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem While Getting Collection"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Collection"],
+        "summary": "Delete a collection by using ID",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Collection ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem While Getting Collection"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get the information about User given by ID",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem Registring User"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Get the information about User given by ID",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Name of the User",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "formData",
+            "description": "Username of User",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "Passowrd of the User",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem Registring User"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete the a User",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem While Getting Collection"
+          }
+        }
+      }
+    },
+    "/notes/{id}": {
+      "get": {
+        "tags": ["Notes"],
+        "summary": "Get the information about Notes given by ID",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Note ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem Registring User"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Notes"],
+        "summary": "Get the information about Notes given by ID",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Notes ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Name of the Notes",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "note",
+            "in": "formData",
+            "description": "Markdown Content Of the Notes",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "is_shared",
+            "in": "formData",
+            "description": "Is Shared Or Not",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "collection",
+            "in": "formData",
+            "description": "Collection ID",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cover_pic",
+            "in": "formData",
+            "description": "Collection ID",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem Registring User"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Notes"],
+        "summary": "Delete the a Note",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Note ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem While Deleting Notes"
+          }
+        }
+      }
+    },
+    "/notes": {
+      "get": {
+        "tags": ["Notes"],
+        "summary": "Get all notes owned by a User",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem while getting Notes"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Notes"],
+        "summary": "Create A notes",
+        "description": "",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Name of the Notes",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "note",
+            "in": "formData",
+            "description": "Markdown Content Of the Notes",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "is_shared",
+            "in": "formData",
+            "description": "Is Shared Or Not",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "collection",
+            "in": "formData",
+            "description": "Collection ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cover_pic",
+            "in": "formData",
+            "description": "Collection ID",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": [],
+          "500": {
+            "message": "Problem while getting Notes"
+          }
+        }
+      }
+    },
+    "/notes/recent": {
+      "tags": ["Notes"],
+      "summary": "Get all recently added Notes upto 20",
+      "description": "",
+      "consumes": ["application/x-www-form-urlencoded"],
+      "produces": ["application/json"],
+      "parameters": [],
+      "security": [
+        {
+          "Bearer": []
+        }
+      ],
+      "responses": {
+        "200": [],
+        "500": {
+          "message": "Problem while getting Notes"
+        }
+      }
+    }
+  }
+}

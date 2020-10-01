@@ -23,7 +23,12 @@ class UserCtrl {
         .send({ message: validateResults.error, type: "Validation Error" });
     } else {
       try {
+        console.log(process.env.HASH_SALT);
+        console.log(input);
+
         input.password = md5(input.password + process.env.HASH_SALT);
+        console.log(input);
+
         const user = await Users.findOneOrFail(input);
         if (user && user.id) {
           const token = jwt.sign(
@@ -99,10 +104,14 @@ class UserCtrl {
     }
     const schema = Joi.object().keys({
       name: Joi.string().required(),
+      username: Joi.string().allow("", null),
+      password: Joi.string().allow("", null),
     });
 
     const input: any = {
       name: req.body.name,
+      username: req.body.username,
+      password: req.body.password,
     };
     const validateResults = schema.validate(input);
     if (validateResults.error) {
@@ -111,6 +120,10 @@ class UserCtrl {
         .send({ message: validateResults.error, type: "Validation Error" });
     } else {
       try {
+        const oldData = await Users.findOneOrFail({ id });
+        if (oldData.password !== validateResults.value.password) {
+          input.password = md5(input.password + process.env.HASH_SALT);
+        }
         const user = await Users.update({ id }, { ...input });
         res.send(user);
       } catch (error) {
