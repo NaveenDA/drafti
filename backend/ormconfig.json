@@ -1,0 +1,11 @@
+{
+  "type": "pg",
+  "host": "localhost",
+  "port": 8081,
+  "username": "admin",
+  "password": "admin",
+  "database": "standi",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["src/**/*.model.ts"]
+}
