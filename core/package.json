@@ -1,0 +1,12 @@
+{
+  "name": "drafti",
+  "version": "1.0.0",
+  "description": "Core Markdown Parser used for the both front-end and backend",
+  "main": "src/index.ts",
+  "dependencies": {
+    "markdown-it": "^11.0.1"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^10.0.2"
+  }
+}
